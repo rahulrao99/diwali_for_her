@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1b0a16">
+  <meta name="description" content="A little Lakshmi Pujan surprise, made just for you.">
+  <title>Shubh Deepavali, Just for You 🪔</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Amavasya night: no moon, just stars and akash kandils -->
+  <div class="sky" aria-hidden="true">
+    <span class="star star--1">✦</span><span class="star star--2">✧</span><span class="star star--3">✦</span>
+    <span class="star star--4">✧</span><span class="star star--5">✦</span><span class="star star--6">✧</span>
+    <div class="sparkles" id="sparkles"></div>
+    <div class="kandil kandil--1"><span class="kandil__body"></span><span class="kandil__tassel"></span></div>
+    <div class="kandil kandil--2"><span class="kandil__body"></span><span class="kandil__tassel"></span></div>
+    <div class="kandil kandil--3"><span class="kandil__body"></span><span class="kandil__tassel"></span></div>
+  </div>
+  <div class="room-glow" aria-hidden="true"></div>
+  <canvas class="fireworks" id="fireworks" aria-hidden="true"></canvas>
+  <div class="garland" aria-hidden="true">
+    <span class="strand strand--1"></span><span class="strand strand--2"></span><span class="strand strand--3"></span>
+    <span class="strand strand--4"></span><span class="strand strand--5"></span>
+  </div>
+
+  <main class="page">
+    <header class="topline"><span>THE NIGHT OF LAKSHMI PUJAN</span><span>८ • ११ • २०२६</span></header>
+
+    <!-- 1. Welcome -->
+    <section class="screen screen--active" id="welcome" aria-labelledby="welcome-title">
+      <div class="eyebrow">✧ SHUBH DEEPAVALI ✧</div>
+      <h1 id="welcome-title">The night of a<br><em>thousand little lights.</em></h1>
+      <p class="intro">Tonight Maa Lakshmi visits every home that glows with love.<br>I hope she finds yours first.</p>
+      <div class="hero-diya" aria-hidden="true">
+        <span class="flame"></span><span class="wick"></span><span class="diya-bowl"></span><span class="diya-glow"></span>
+      </div>
+      <p class="prompt">Will you do a little Lakshmi Pujan with me?</p>
+      <button class="button button--gold" id="beginBtn">Let's begin <span>→</span></button>
+    </section>
+
+    <!-- 2. Rangoli -->
+    <section class="screen" id="rangoli" aria-labelledby="rangoli-title">
+      <div class="eyebrow">FIRST, A RANGOLI AT THE DOORSTEP</div>
+      <h2 id="rangoli-title">Let's make a rangoli<br><em>to welcome her.</em></h2>
+      <p class="section-copy">Tap the rangoli to add each colourful layer.</p>
+      <button class="rangoli" id="rangoliBtn" aria-label="Add a layer to the rangoli">
+        <svg id="rangoliSvg" viewBox="-115 -115 230 230" aria-hidden="true">
+          <circle r="104" fill="none" stroke="rgba(255,236,200,.28)" stroke-width="1.5" stroke-dasharray="3 6"/>
+        </svg>
+      </button>
+      <p class="hint" id="rangoliHint">Tap to add colour ✨ (0 / 5)</p>
+      <button class="button button--gold is-hidden" id="diyasNext">Now, the diyas <span>→</span></button>
+    </section>
+
+    <!-- 3. Seven diyas -->
+    <section class="screen" id="diyas" aria-labelledby="diyas-title">
+      <div class="eyebrow">LIGHT UP THE HOME</div>
+      <h2 id="diyas-title">Light all seven diyas<br><em>with me.</em></h2>
+      <p class="section-copy">One for every wish I have for you.</p>
+      <div class="diya-row" id="diyaRow"></div>
+      <p class="diya-wish" id="diyaWish" aria-live="polite">Tap a diya to light it ✨</p>
+      <button class="button button--gold is-hidden" id="doorsNext">The doors are ready for Maa Lakshmi <span>→</span></button>
+    </section>
+
+    <!-- 4. Lakshmi Pujan: doors, darshan and aarti -->
+    <section class="screen" id="pujan" aria-labelledby="pujan-title">
+      <div class="eyebrow">LAKSHMI PUJAN 🪔</div>
+      <h2 id="pujan-title">Open the doors,<br><em>Maa Lakshmi is here.</em></h2>
+
+      <div class="shrine-wrap" id="shrineWrap">
+        <div class="toran" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <button class="door-frame" id="doorBtn" aria-label="Open the doors for Maa Lakshmi">
+          <span class="shrine">
+            <span class="shrine__halo"></span>
+            <!-- To use a real picture of Maa Lakshmi, save it as lakshmi.png next to index.html -->
+            <svg class="shrine__art" viewBox="0 0 200 180" aria-hidden="true">
+              <defs>
+                <linearGradient id="petalFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe1e5"/><stop offset="1" stop-color="#e0607a"/></linearGradient>
+                <linearGradient id="petalBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc4cd"/><stop offset="1" stop-color="#b8425e"/></linearGradient>
+                <radialGradient id="coinGold"><stop offset="0" stop-color="#fff2b8"/><stop offset="1" stop-color="#d39a3a"/></radialGradient>
+              </defs>
+              <ellipse cx="100" cy="128" rx="74" ry="11" fill="#3f7a5a"/>
+              <ellipse cx="100" cy="126" rx="60" ry="7" fill="#5c9a72"/>
+              <path d="M100 122 C76 98 74 64 100 32 C126 64 124 98 100 122Z" fill="url(#petalBack)" transform="rotate(-58 100 122)"/>
+              <path d="M100 122 C76 98 74 64 100 32 C126 64 124 98 100 122Z" fill="url(#petalBack)" transform="rotate(58 100 122)"/>
+              <path d="M100 122 C78 98 77 66 100 36 C123 66 122 98 100 122Z" fill="url(#petalFront)" transform="rotate(-30 100 122)"/>
+              <path d="M100 122 C78 98 77 66 100 36 C123 66 122 98 100 122Z" fill="url(#petalFront)" transform="rotate(30 100 122)"/>
+              <path d="M100 124 C80 98 80 62 100 28 C120 62 120 98 100 124Z" fill="url(#petalFront)"/>
+              <circle cx="66" cy="152" r="12" fill="url(#coinGold)" stroke="#b97b2c"/>
+              <circle cx="100" cy="158" r="13" fill="url(#coinGold)" stroke="#b97b2c"/>
+              <circle cx="134" cy="152" r="12" fill="url(#coinGold)" stroke="#b97b2c"/>
+            </svg>
+            <img class="shrine__photo" src="lakshmi.png" alt="" onerror="this.remove()">
+          </span>
+          <span class="door door--left"><span class="door__panel"></span><span class="door__knob"></span></span>
+          <span class="door door--right"><span class="door__panel"></span><span class="door__knob"></span></span>
+        </button>
+        <div class="aarti-orbit" aria-hidden="true">
+          <span class="thali"><span class="thali__flame"></span><span class="thali__dot thali__dot--1"></span><span class="thali__dot thali__dot--2"></span></span>
+        </div>
+      </div>
+
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="footprint" viewBox="0 0 40 70">
+          <ellipse cx="20" cy="45" rx="12" ry="21"/>
+          <circle cx="8" cy="15" r="4"/><circle cx="15" cy="9" r="4.4"/><circle cx="23" cy="8" r="4.2"/>
+          <circle cx="30" cy="11" r="3.7"/><circle cx="35" cy="18" r="3.1"/>
+        </symbol>
+      </svg>
+      <div class="footprints" id="footprints" aria-hidden="true">
+        <svg style="--i:0"><use href="#footprint"/></svg><svg style="--i:1"><use href="#footprint"/></svg>
+        <svg style="--i:2"><use href="#footprint"/></svg><svg style="--i:3"><use href="#footprint"/></svg>
+        <svg style="--i:4"><use href="#footprint"/></svg><svg style="--i:5"><use href="#footprint"/></svg>
+      </div>
+
+      <p class="mantra is-hidden" id="mantra">ॐ श्रीं महालक्ष्म्यै नमः</p>
+      <p class="hint" id="pujanHint">Tap the doors to welcome her 🙏</p>
+      <button class="button button--gold is-hidden" id="aartiBtn">Do the aarti together 🔔</button>
+      <button class="button button--gold is-hidden" id="letterNext">A few words from my heart <span>→</span></button>
+    </section>
+
+    <!-- 5. Letter -->
+    <section class="screen" id="letter" aria-labelledby="letter-title">
+      <div class="eyebrow">A NOTE FROM MY HEART</div>
+      <article class="letter-card">
+        <div class="letter-card__ornament">❧</div>
+        <h2 id="letter-title">To my favourite light,</h2>
+        <div class="typed-message" id="typedMessage" aria-live="polite"></div>
+        <div class="letter-card__sign">With all my love,<br><strong>Rahul ❤️</strong></div>
+      </article>
+      <button class="button button--gold is-hidden" id="finaleNext">Let's light up the sky <span>→</span></button>
+    </section>
+
+    <!-- 6. Fireworks finale -->
+    <section class="screen" id="finale" aria-labelledby="final-title">
+      <div class="final-diyas" aria-hidden="true"><span>🪔</span><span>🪔</span><span>🪔</span></div>
+      <div class="eyebrow">HAPPY DIWALI, MY LOVE</div>
+      <h2 id="final-title">May your life always be<br><em>this bright.</em></h2>
+      <p class="final-message">Wishing you a Deepavali full of light, laughter, prosperity and love. May Maa Lakshmi stay in your home and in your heart, all year long.</p>
+      <p class="final-love">You are the brightest light of my Diwali.<br>Shubh Deepavali, my favourite person. ❤️</p>
+      <div class="signature">Forever yours,<br><strong>Rahul</strong></div>
+      <p class="hint finale-hint">Tap the sky for fireworks 🎆 — no smoke, no noise, just for you</p>
+      <div class="final-actions">
+        <button class="button button--gold" id="replayBtn">Experience it again ↻</button>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">A LITTLE DIWALI MAGIC • MADE ESPECIALLY FOR YOU</footer>
+  <script src="script.js"></script>
+</body>
+</html>
