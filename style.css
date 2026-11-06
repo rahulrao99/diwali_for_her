@@ -1,0 +1,283 @@
+/* =========================================================
+   SHUBH DEEPAVALI — Lakshmi Pujan: design tokens and reset
+   ========================================================= */
+:root {
+  color-scheme: dark;
+  --night: #1b0a16;
+  --cream: #fff4dc;
+  --muted: #dcc6bf;
+  --gold: #f6c978;
+  --marigold: #ffa62b;
+  --rose: #f0a7a4;
+  --glass: rgba(255, 240, 215, .07);
+  --line: rgba(255, 210, 150, .24);
+  --shadow: 0 24px 80px rgba(0, 0, 0, .32);
+  --glow: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+html { min-height: 100%; background: var(--night); }
+body {
+  min-height: 100vh; margin: 0; overflow-x: hidden; color: var(--cream);
+  background: radial-gradient(ellipse at 50% 0%, #4d1f35 0%, #2a0f22 40%, #14070f 100%);
+}
+button { font: inherit; }
+button:focus-visible { outline: 2px solid #fff0bd; outline-offset: 5px; }
+.is-hidden { display: none !important; }
+
+/* =========================================================
+   Amavasya sky: stars, sparkles, akash kandils, room glow
+   ========================================================= */
+.sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.star { position: absolute; color: #ffe4aa; animation: twinkle 3s ease-in-out infinite; }
+.star--1 { top: 16%; left: 12%; font-size: 19px; }
+.star--2 { top: 26%; left: 84%; animation-delay: .7s; }
+.star--3 { top: 60%; left: 7%; animation-delay: 1.3s; }
+.star--4 { top: 74%; right: 10%; font-size: 20px; animation-delay: .4s; }
+.star--5 { top: 42%; right: 22%; animation-delay: 1.8s; }
+.star--6 { top: 11%; left: 46%; animation-delay: 2.3s; }
+.sparkles { position: absolute; inset: 0; }
+.sparkle {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #ffe6b2;
+  box-shadow: 0 0 12px 3px rgba(255, 206, 122, .4); animation: drift 7s ease-in-out infinite;
+}
+@keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.75); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes drift { 0%,100% { transform: translate3d(0,0,0); opacity: .2; } 50% { transform: translate3d(10px,-22px,0); opacity: .9; } }
+
+/* Akash kandil: a hanging lantern on a string */
+.kandil { position: absolute; top: 0; width: 46px; transform-origin: 50% 0; animation: sway 5s ease-in-out infinite; }
+.kandil::before { content: ""; display: block; width: 1px; height: var(--string, 90px); margin: 0 auto; background: rgba(255, 220, 170, .35); }
+.kandil__body {
+  display: block; width: 34px; height: 34px; margin: 6px auto 0; transform: rotate(45deg); border-radius: 4px;
+  background: linear-gradient(135deg, #ffd27a, #ff7a3d 60%, #c2362f);
+  box-shadow: 0 0 30px 8px rgba(255, 140, 60, .35), inset 0 0 12px rgba(255, 245, 200, .7);
+}
+.kandil__tassel { display: block; width: 14px; height: 30px; margin: 4px auto 0; background: repeating-linear-gradient(90deg, #ffb347 0 2px, transparent 2px 4px); border-radius: 0 0 6px 6px; }
+.kandil--1 { left: 6%; --string: 120px; }
+.kandil--2 { right: 7%; --string: 70px; animation-delay: -2s; }
+.kandil--3 { right: 26%; --string: 150px; animation-delay: -3.5s; transform: scale(.7); opacity: .75; }
+@keyframes sway { 0%,100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+
+/* Grows warmer as the seven diyas are lit */
+.room-glow {
+  position: fixed; inset: 0; pointer-events: none; opacity: var(--glow); transition: opacity 1s ease;
+  background: radial-gradient(ellipse at 50% 70%, rgba(255, 160, 70, .32), rgba(255, 120, 60, .1) 45%, transparent 75%);
+}
+.fireworks { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+/* Marigold garland along the top with hanging strands */
+.garland {
+  position: absolute; top: 0; left: 0; right: 0; height: 22px; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(circle at 11px 11px, #ffcf3f 0 8px, transparent 9px) 0 0 / 22px 22px repeat-x,
+    radial-gradient(circle at 11px 11px, #f77f1e 0 8px, transparent 9px) 11px 4px / 22px 22px repeat-x;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.3));
+}
+.strand {
+  position: absolute; top: 14px; width: 16px; height: var(--len, 90px); transform-origin: 50% 0; animation: sway 4s ease-in-out infinite;
+  background: radial-gradient(circle at 8px 8px, #ffc93c 0 7px, transparent 8px) 0 0 / 16px 15px repeat-y;
+}
+.strand::after { content: ""; position: absolute; left: 3px; bottom: -10px; width: 10px; height: 14px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #3f8a52; }
+.strand:nth-child(even) { background-image: radial-gradient(circle at 8px 8px, #f7811f 0 7px, transparent 8px); }
+.strand--1 { left: 3%; --len: 75px; }
+.strand--2 { left: 24%; --len: 50px; animation-delay: -1s; }
+.strand--3 { left: 50%; --len: 62px; animation-delay: -2s; }
+.strand--4 { right: 24%; --len: 50px; animation-delay: -1.5s; }
+.strand--5 { right: 3%; --len: 75px; animation-delay: -.5s; }
+
+/* =========================================================
+   Page frame and screen transitions
+   ========================================================= */
+.page {
+  position: relative; z-index: 1; width: min(760px, calc(100% - 32px));
+  min-height: calc(100vh - 76px); margin: 0 auto; padding-top: 86px; display: flex; flex-direction: column;
+}
+.topline, .footer {
+  display: flex; justify-content: space-between; gap: 12px; padding: 23px 2px;
+  color: rgba(255, 231, 194, .56); font: 10px/1.4 Arial, sans-serif; letter-spacing: .19em;
+}
+.footer { position: relative; z-index: 1; justify-content: center; text-align: center; padding-top: 8px; }
+.screen {
+  display: none; width: 100%; flex: 1; min-height: 650px; padding: 40px 30px 56px;
+  align-items: center; flex-direction: column; justify-content: center; text-align: center;
+  animation: screenIn .8s cubic-bezier(.2,.7,.2,1) both;
+}
+.screen--active { display: flex; }
+@keyframes screenIn { from { opacity: 0; transform: translateY(18px) scale(.99); } to { opacity: 1; transform: none; } }
+.eyebrow { color: var(--gold); font: 10px/1.5 Arial, sans-serif; letter-spacing: .28em; margin-bottom: 22px; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2 { font-weight: 400; line-height: 1.13; letter-spacing: -.035em; }
+h1 { font-size: clamp(42px, 8vw, 68px); margin-bottom: 22px; }
+h2 { font-size: clamp(32px, 6vw, 50px); margin-bottom: 16px; }
+h1 em, h2 em { color: var(--gold); font-style: italic; }
+.intro, .section-copy { color: var(--muted); font-size: 16px; line-height: 1.85; }
+.prompt, .hint { color: #e7cfa9; font-size: 14px; letter-spacing: .025em; margin: 18px 0 22px; }
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.button {
+  min-height: 50px; border: 1px solid transparent; border-radius: 999px; padding: 0 25px;
+  cursor: pointer; transition: transform .25s ease, box-shadow .25s ease;
+  font: 12px/1 Arial, sans-serif; letter-spacing: .06em;
+}
+.button:hover { transform: translateY(-3px); }
+.button:active { transform: scale(.98); }
+.button--gold { color: #3a1f15; background: linear-gradient(135deg, #ffe7b1, #f0a94e); box-shadow: 0 10px 30px rgba(240, 150, 70, .25); }
+.button--gold:hover { box-shadow: 0 14px 38px rgba(240, 150, 70, .4); }
+.button--gold span { margin-left: 12px; font-size: 17px; }
+
+/* =========================================================
+   Welcome diya
+   ========================================================= */
+.hero-diya { position: relative; width: 190px; height: 175px; margin: 16px auto 4px; }
+.diya-glow { position: absolute; width: 170px; height: 125px; left: 10px; bottom: 6px; border-radius: 50%; background: rgba(255, 160, 60, .2); filter: blur(24px); }
+.diya-bowl {
+  position: absolute; width: 142px; height: 62px; left: 50%; bottom: 20px; transform: translateX(-50%);
+  border-radius: 12px 12px 75px 75px; border-bottom: 8px solid #a3402d;
+  background: linear-gradient(180deg, #f8c77b, #c25a37 75%); box-shadow: 0 12px 24px rgba(0,0,0,.25);
+}
+.flame, .mini-diya__flame, .thali__flame {
+  position: absolute; z-index: 2; width: 26px; height: 48px; left: 50%; bottom: 83px;
+  transform: translateX(-50%); border-radius: 80% 10% 80% 80%;
+  background: radial-gradient(ellipse at 65% 70%, #fffbd7 0 18%, #ffd45f 35%, #f18a36 72%, transparent 74%);
+  filter: drop-shadow(0 0 13px #ffbd56); animation: flame 1.15s ease-in-out infinite;
+}
+.wick { position: absolute; z-index: 3; left: 50%; bottom: 75px; width: 3px; height: 13px; background: #49271f; transform: translateX(-50%); }
+@keyframes flame { 0%,100% { transform: translateX(-50%) rotate(-4deg) scaleY(1); } 50% { transform: translateX(-50%) rotate(5deg) scaleY(1.1); } }
+
+/* =========================================================
+   Rangoli
+   ========================================================= */
+.rangoli { width: min(320px, 82vw); aspect-ratio: 1; border: 0; padding: 0; background: transparent; cursor: pointer; margin: 6px 0 0; border-radius: 50%; }
+.rangoli svg { width: 100%; height: 100%; overflow: visible; }
+.rangoli-layer { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(.3) rotate(-40deg); transition: opacity .8s ease, transform 1s cubic-bezier(.3,1.4,.5,1); }
+.rangoli-layer.is-on { opacity: 1; transform: none; }
+.rangoli.is-complete svg { animation: slowSpin 70s linear infinite; filter: drop-shadow(0 0 18px rgba(255, 170, 80, .3)); }
+@keyframes slowSpin { to { transform: rotate(360deg); } }
+
+/* =========================================================
+   Seven diyas
+   ========================================================= */
+.diya-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 10px; margin: 26px 0 6px; max-width: 560px; }
+.mini-diya { position: relative; width: 62px; height: 78px; border: 0; padding: 0; background: transparent; cursor: pointer; transition: transform .25s; }
+.mini-diya:hover { transform: translateY(-4px); }
+.mini-diya__bowl {
+  position: absolute; left: 50%; bottom: 6px; width: 54px; height: 24px; transform: translateX(-50%);
+  border-radius: 6px 6px 30px 30px; border-bottom: 4px solid #a3402d; background: linear-gradient(180deg, #f8c77b, #c25a37 75%);
+}
+.mini-diya__flame { width: 14px; height: 26px; bottom: 30px; opacity: .08; transition: opacity .5s; }
+.mini-diya__halo { position: absolute; left: 50%; bottom: 10px; width: 70px; height: 60px; transform: translateX(-50%); border-radius: 50%; background: rgba(255, 170, 70, 0); filter: blur(14px); transition: background .6s; }
+.mini-diya.is-lit .mini-diya__flame { opacity: 1; }
+.mini-diya.is-lit .mini-diya__halo { background: rgba(255, 170, 70, .35); }
+.mini-diya.is-lit { cursor: default; }
+.diya-wish { min-height: 26px; color: var(--gold); font-size: 17px; font-style: italic; margin: 18px 0 22px; }
+
+/* =========================================================
+   Lakshmi Pujan: toran, doors, shrine, aarti, footprints
+   ========================================================= */
+.shrine-wrap { position: relative; width: 260px; margin: 12px 0 0; }
+.toran { position: relative; z-index: 3; display: flex; justify-content: space-between; padding: 0 4px; margin-bottom: -10px; }
+.toran::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 3px; background: #7a3b22; border-radius: 3px; }
+.toran span { position: relative; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle, #ffe066, #f59f00); box-shadow: 0 0 8px rgba(255, 180, 60, .5); }
+.toran span:nth-child(even) { top: 10px; background: radial-gradient(circle, #ffa94d, #e8590c); }
+.toran span::after { content: ""; position: absolute; left: 6px; top: 18px; width: 8px; height: 14px; border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%; background: #3f8a52; }
+.door-frame {
+  position: relative; display: block; width: 260px; height: 310px; padding: 0; cursor: pointer; overflow: hidden;
+  border: 10px solid #7a3b22; border-radius: 130px 130px 8px 8px; perspective: 900px;
+  background: radial-gradient(ellipse at 50% 55%, #6b2a3c, #3a1424 70%);
+  box-shadow: 0 0 0 2px rgba(246, 201, 120, .35), var(--shadow);
+}
+.shrine { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.shrine__halo { position: absolute; width: 230px; height: 230px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 220, 140, .75), rgba(255, 170, 70, 0) 70%); opacity: .2; transition: opacity 1.2s; }
+.shrine__art { position: relative; width: 190px; }
+.shrine__photo { position: absolute; inset: 22px 18px 10px; width: calc(100% - 36px); height: calc(100% - 32px); object-fit: contain; }
+.door {
+  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2;
+  background: linear-gradient(180deg, #a85a32, #6e2d18); transition: transform 1.8s cubic-bezier(.5,0,.2,1);
+}
+.door--left { left: 0; transform-origin: left center; border-right: 1px solid rgba(0,0,0,.35); }
+.door--right { right: 0; transform-origin: right center; border-left: 1px solid rgba(255,220,170,.15); }
+.door__panel { position: absolute; inset: 70px 16px 24px; border: 2px solid rgba(255, 210, 140, .5); border-radius: 6px; box-shadow: inset 0 0 0 6px rgba(0,0,0,.08); }
+.door__knob { position: absolute; top: 55%; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff2b8, #c8893e); }
+.door--left .door__knob { right: 10px; }
+.door--right .door__knob { left: 10px; }
+.door-frame.is-open { cursor: default; }
+.door-frame.is-open .door--left { transform: rotateY(-100deg); }
+.door-frame.is-open .door--right { transform: rotateY(100deg); }
+.door-frame.is-open .shrine__halo { opacity: 1; animation: haloPulse 3s ease-in-out infinite 1.2s; }
+@keyframes haloPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+.aarti-orbit { position: absolute; left: 50%; top: 58%; width: 0; height: 0; z-index: 4; opacity: 0; transition: opacity .6s; }
+.thali {
+  position: absolute; left: 92px; top: -27px; width: 54px; height: 54px; border-radius: 50%;
+  background: radial-gradient(circle, #ffe9a8 0 35%, #e0a94a 60%, #b07126); box-shadow: 0 0 22px rgba(255, 190, 90, .6), inset 0 0 0 3px #c8893e;
+}
+.thali__flame { width: 14px; height: 26px; bottom: 26px; }
+.thali__dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; }
+.thali__dot--1 { left: 10px; top: 30px; background: #d6336c; }
+.thali__dot--2 { right: 10px; top: 30px; background: #fff7e0; }
+.shrine-wrap.is-aarti .aarti-orbit { opacity: 1; animation: orbit 2.4s linear 3; }
+.shrine-wrap.is-aarti .thali { animation: counterOrbit 2.4s linear 3; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes counterOrbit { to { transform: rotate(-360deg); } }
+
+.footprints { display: flex; justify-content: center; align-items: flex-start; gap: 12px; height: 50px; margin: 18px 0 0; }
+.footprints svg { width: 17px; height: 30px; fill: #e2665c; opacity: 0; translate: 0 8px; }
+.footprints svg:nth-child(odd) { scale: -1 1; margin-top: 14px; }
+.footprints.is-walking svg { animation: stepIn .6s ease forwards; animation-delay: calc(1.2s + var(--i) * .35s); }
+@keyframes stepIn { to { opacity: .85; translate: 0 0; } }
+.mantra { color: var(--gold); font-size: 20px; margin: 10px 0 0; animation: screenIn 1s both; }
+
+/* Particles: sparkles, coins, petals */
+.particle { position: fixed; z-index: 6; pointer-events: none; line-height: 1; will-change: transform, opacity; }
+.particle--coin { border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff4c2, #e7b34f 55%, #b47a2a); box-shadow: 0 0 10px rgba(255, 205, 110, .6); }
+
+/* =========================================================
+   Letter
+   ========================================================= */
+.letter-card {
+  width: min(560px, 100%); padding: 34px clamp(22px, 6vw, 48px); margin: 0 0 25px;
+  color: #4a302c; text-align: left; border: 1px solid rgba(255,255,255,.55); border-radius: 5px 22px 5px 22px;
+  background: linear-gradient(145deg, #fff5df, #f3dbb5); box-shadow: 0 25px 70px rgba(0,0,0,.3); transform: rotate(-.5deg);
+}
+.letter-card__ornament { color: #c0703f; font-size: 30px; text-align: center; margin-bottom: 8px; }
+.letter-card h2 { font-size: 30px; color: #7a3b2e; }
+.typed-message { min-height: 250px; white-space: pre-line; font-size: 16px; line-height: 1.9; color: #63443b; }
+.letter-card__sign { text-align: right; color: #8b5a49; line-height: 1.7; margin-top: 18px; }
+.letter-card__sign strong { font-size: 22px; color: #a5492f; }
+
+/* =========================================================
+   Finale
+   ========================================================= */
+#finale { cursor: pointer; }
+.final-diyas { display: flex; gap: 28px; font-size: 36px; margin-bottom: 28px; filter: drop-shadow(0 0 14px rgba(255,184,86,.4)); }
+.final-diyas span:nth-child(2) { transform: translateY(-13px); }
+.final-message, .final-love { max-width: 540px; color: var(--muted); line-height: 1.85; font-size: 16px; }
+.final-love { color: #ffd9b0; margin: 18px 0 22px; }
+.signature { color: #e8c7a4; line-height: 1.7; font-style: italic; }
+.signature strong { font-size: 30px; color: var(--gold); font-style: normal; }
+.finale-hint { margin: 22px 0 0; opacity: .8; }
+.final-actions { display: flex; justify-content: center; margin-top: 24px; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 600px) {
+  .page { width: min(100% - 20px, 520px); min-height: calc(100vh - 60px); padding-top: 60px; }
+  .strand--1, .strand--5 { --len: 45px; } .strand--2, .strand--4 { --len: 30px; } .strand--3 { --len: 38px; }
+  .topline { font-size: 8px; letter-spacing: .13em; padding: 17px 2px; }
+  .screen { min-height: 610px; padding: 34px 8px 45px; }
+  .intro, .section-copy { font-size: 14px; }
+  .kandil--3 { display: none; }
+  .kandil--1 { --string: 70px; } .kandil--2 { --string: 40px; }
+  .mini-diya { width: 54px; }
+  .diya-wish { font-size: 15px; }
+  .typed-message { min-height: 280px; font-size: 14px; }
+  .letter-card h2 { font-size: 25px; }
+  .final-diyas { font-size: 29px; gap: 18px; }
+  .footer { font-size: 8px; letter-spacing: .12em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
